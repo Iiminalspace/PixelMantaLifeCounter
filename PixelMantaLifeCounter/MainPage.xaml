@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:PixelMantaLifeCounter.ViewModels"
+             x:Class="PixelMantaLifeCounter.MainPage"
+             Shell.NavBarIsVisible="False"
+             x:DataType="viewmodels:LifeCounterViewModel">
+    <Grid 
+        RowDefinitions="2*, *"
+        ColumnDefinitions="*,2*,*">
+        <Image Grid.Column="1"
+               Grid.Row="0"
+               Aspect="AspectFit"
+               IsVisible="{Binding IsMonarch}"
+               Source="pixelmanta_transparent_notext.png"/>
+        
+        <Label
+            Grid.Column="1"
+            Grid.Row="0"
+            Text="{Binding Life}"
+            FontFamily="Joystix"
+            TextColor="{StaticResource Primary}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            FontSize="100"/>
+
+        <Label
+            Grid.Column="0"
+            Grid.Row="0"
+            Text="-"
+            FontFamily="Joystix"
+            TextColor="{StaticResource Secondary}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            FontSize="150">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:LifeCounterViewModel}}, Path=LoseLifeCommand}"/>
+                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:LifeCounterViewModel}}, Path=LoseFiveLifeCommand}"
+                                      NumberOfTapsRequired="2"/>
+            </Label.GestureRecognizers>
+        </Label>
+
+        <Label
+            Grid.Column="2"
+            Text="+"
+            FontFamily="Joystix"
+            TextColor="{StaticResource Tertiary}"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            FontSize="125">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:LifeCounterViewModel}}, Path=AddLifeCommand}"/>
+                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:LifeCounterViewModel}}, Path=AddFiveLifeCommand}"
+                                      NumberOfTapsRequired="2"/>
+            </Label.GestureRecognizers>
+        </Label>
+
+        <Slider Grid.Column="1"
+                Grid.Row="1"
+                VerticalOptions="End"
+                HeightRequest="60"
+                Minimum="0"
+                Maximum="10"
+                Value="{Binding PoisonCounters}"/>
+
+        <Label Grid.Row="1"
+               Grid.Column="0"
+               Grid.ColumnSpan="2"
+               FontFamily="Joystix"
+               TextColor="{StaticResource Secondary}"
+               VerticalOptions="Start"
+               Text="{Binding Pixel}"
+               FontSize="60"
+               CharacterSpacing="10"/>
+
+        <Label Grid.Row="1"
+               Grid.Column="1"
+               Grid.ColumnSpan="2"
+               FontFamily="Joystix"
+               TextColor="{StaticResource Tertiary}"
+               VerticalOptions="Start"
+               HorizontalOptions="End"
+               Text="{Binding Manta}"
+               FontSize="60"
+               CharacterSpacing="10"/>
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="PixelMantaLifeCounter.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:PixelMantaLifeCounter"
+    xmlns:viewmodels="clr-namespace:PixelMantaLifeCounter.ViewModels"
+    x:DataType="viewmodels:LifeCounterViewModel"
+    FlyoutBehavior="Flyout"
+    FlyoutHeaderBehavior="Scroll"
+    FlyoutBackground="{DynamicResource Seafoam}">
+
+    <Shell.Resources>
+        <Color x:Key="Seafoam">#ADD2C4</Color>
+    </Shell.Resources>
+
+    <ShellContent
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid BackgroundColor="{DynamicResource Seafoam}"
+                  HeightRequest="150">
+                <Image Aspect="AspectFit"
+                       Source="pixelmanta_transparent_nospace.png"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid ColumnDefinitions="*, *"
+                  RowDefinitions="*, *, *, *"
+                  HeightRequest="400"
+                  BackgroundColor="{DynamicResource Seafoam}">
+                <Label Grid.Column="0"
+                       Grid.Row="0"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Start"
+                       FontFamily="Joystix"
+                       TextColor="{StaticResource Gray600}"
+                       FontSize="40"
+                       Text="{Binding Source={x:Reference CommanderDamage1},
+                              Path=Value,
+                              StringFormat='{0}'}"
+                       />
+                <Stepper x:Name="CommanderDamage1"
+                         Grid.Column="0"
+                         Grid.Row="0"
+                         HorizontalOptions="Center"
+                         VerticalOptions="End"
+                         Maximum="21"
+                         Value="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:LifeCounterViewModel}}, Path=CommanderDamage1}"/>
+                <Label Grid.Column="1"
+                       Grid.Row="0"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Start"
+                       FontFamily="Joystix"
+                       FontSize="40"
+                       TextColor="{StaticResource Tertiary}"
+                       Text="{Binding Source={x:Reference CommanderDamage2},
+                              Path=Value,
+                              StringFormat='{0}'}"/>
+                <Stepper x:Name="CommanderDamage2"
+                         Grid.Column="1"
+                         Grid.Row="0"
+                         HorizontalOptions="Center"
+                         VerticalOptions="End"
+                         Maximum="21"
+                         Value="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:LifeCounterViewModel}}, Path=CommanderDamage2}"/>
+                <Label Grid.Column="0"
+                       Grid.Row="1"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Start"
+                       FontFamily="Joystix"
+                       FontSize="40"
+                       TextColor="#F5AEBC"
+                       Text="{Binding Source={x:Reference CommanderDamage3},
+                              Path=Value,
+                              StringFormat='{0}'}"/>
+                <Stepper x:Name="CommanderDamage3" 
+                         Grid.Column="0"
+                         Grid.Row="1"
+                         HorizontalOptions="Center"
+                         VerticalOptions="End"
+                         Maximum="21"
+                         Value="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:LifeCounterViewModel}}, Path=CommanderDamage3}"/>
+                <Label Grid.Column="1"
+                       Grid.Row="1"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Start"
+                       FontFamily="Joystix"
+                       FontSize="40"
+                       TextColor="{StaticResource Primary}"
+                       Text="{Binding Source={x:Reference CommanderDamage4},
+                              Path=Value,
+                              StringFormat='{0}'}"/>
+                <Stepper x:Name="CommanderDamage4" 
+                         Grid.Column="1"
+                         Grid.Row="1"
+                         HorizontalOptions="Center"
+                         VerticalOptions="End"
+                         Maximum="21"
+                         Value="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:LifeCounterViewModel}}, Path=CommanderDamage4}"/>
+                <Image Grid.ColumnSpan="2"
+                       Grid.Row="2"
+                       Aspect="AspectFill"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Start"
+                       HeightRequest="25"
+                       WidthRequest="25"
+                       TranslationY="10"
+                       Source="simple_crown.png"/>
+                <Switch Grid.ColumnSpan="2"
+                        Grid.Row="2"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        OnColor="#B89B61"
+                        ThumbColor="#E9C376"
+                        IsToggled="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:LifeCounterViewModel}}, Path=IsMonarch}">
+                </Switch>
+                <Button Grid.ColumnSpan="2"
+                        Grid.Row="3"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Margin="8"
+                        BackgroundColor="{StaticResource Tertiary}"
+                        FontFamily="Joystix"
+                        Text="Delete Save"
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:LifeCounterViewModel}}, Path=ResetCommand}"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+</Shell>
